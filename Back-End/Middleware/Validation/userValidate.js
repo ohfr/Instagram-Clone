@@ -24,15 +24,18 @@ const validateUserLogin = () => {
 
 const validateLogin = () => {
     return async (req, res, next) => {
-        const username = req.body.username.toLowerCase();
-        const password = req.body.password;
+        const { username, password } = req.body;
 
         if (username && password) {
             let user = await db.userLogin(username);
+            console.log(username)
 
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user);
-                req.token = token;
+                req.validate = {
+                    id: user.id,
+                    token
+                };
                 next();
             } else {
                 res.status(401).json({message: "Invalid credentials"});

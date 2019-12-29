@@ -20,9 +20,14 @@ const userLogin = async (username) => {
     return db("users").where("username", username).first();
 };
 
+const updateUser = async (id, newUser) => {
+    return db("users").where("id", id).update(newUser).first();
+};
+
 module.exports = {
     getUser,
     getUsers,
     addUser,
-    userLogin
+    userLogin,
+    updateUser
 }

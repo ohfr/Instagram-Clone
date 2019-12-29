@@ -6,15 +6,11 @@ const PORT = process.env.PORT || 8000;
 
 const HOST = process.env.HOST || `127.0.0.1`
 
-const loginRoute = require("./Routes/loginRoute");
-
-const registerRoute = require("./Routes/registerRoute");
+const userRoute = require("./Routes/userRoute");
 
 server.use(express.json());
 
-server.use("/login", loginRoute);
-
-server.use("/register", registerRoute);
+server.use("/users", userRoute);
 
 server.use((err, req, res, next) => {
     console.log(err);
