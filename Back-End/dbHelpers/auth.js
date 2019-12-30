@@ -27,4 +27,7 @@ const generateToken = (user) =>{
     return jwt.sign(payload, secret.jwtSecret, options);
 };
 
-module.exports = {verifyToken, generateToken};
+module.exports = {
+    verifyToken, 
+    generateToken
+};
