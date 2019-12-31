@@ -4,15 +4,19 @@ const router = express.Router();
 
 const db = require("../dbHelpers/users");
 
-const { validateUserLogin, validateLogin, validateNewUser } = require("../Middleware/Validation/userValidate");
+const { validateUserLogin, validateLogin, validateNewUser, validateUserId } = require("../Middleware/Validation/userValidate");
 
 const bcrypt = require("bcryptjs");
 
 const { generateToken } = require("../dbHelpers/auth");
 
-router.get("/:id", async (req, res, next) => {
+const postRoute = require("../Routes/postRoute");
+
+router.use("/:id/posts", postRoute);
+
+router.get("/:id", validateUserId(), async (req, res, next) => {
     try {
-        res.json(await db.getUser(req.params.id));
+        res.json(req.user);
     } catch(err) {
         next(err);
     };

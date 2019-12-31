@@ -4,6 +4,8 @@ const db = require("../../dbHelpers/users");
 
 const { generateToken } = require("../../dbHelpers/auth");
 
+const postsDb = require("../../dbHelpers/posts");
+
 const validateNewUser = () => {
     return async (req, res, next) => {
         if (!req.body.username || !req.body.password || !req.body.first_name || !req.body.last_name) {
@@ -46,8 +48,26 @@ const validateLogin = () => {
     };
 };
 
+const validateUserId = () => {
+    return async (req, res, next) => {
+        const user = await db.getUser(req.params.id);
+
+        if (user) {
+            const posts = await postsDb.getPostByUserId(req.params.id);
+            if (posts) {
+                user.posts = posts;
+            };
+            req.user = user;
+            next();
+        } else {
+            res.status(500).json({message: "No user with specified ID"});
+        };
+    };
+};
+
 module.exports = {
     validateNewUser,
     validateUserLogin,
-    validateLogin
+    validateLogin,
+    validateUserId
 }
