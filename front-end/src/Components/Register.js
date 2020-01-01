@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../Utils/api';
+import { connect } from 'react-redux';
+import { fetchLogin } from '../Actions/userActions';
 
 const Register = (props) => {
     const [user,setUser] = useState({
@@ -24,6 +26,7 @@ const Register = (props) => {
                 .then(res => {
                     console.log(res);
                     localStorage.setItem("token", res.data.token);
+                    props.fetchLogin(res.data);
                     props.history.push("/");
                 })
                 .catch(err => {
@@ -49,4 +52,8 @@ const Register = (props) => {
     );
 };
 
-export default Register;
+const mapDispachToProps = {
+    fetchLogin
+};
+
+export default connect(null, mapDispachToProps)(Register);

@@ -1,5 +1,3 @@
-import api from "../Utils/api";
-
 export const LOGOUT = "LOGOUT";
 export const LOGIN = "LOGIN";
 export const LOGIN_START = "LOGIN_START";

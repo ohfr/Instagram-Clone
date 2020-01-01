@@ -26,6 +26,7 @@ const Login = (props) => {
 
         };
     };
+
     const handleChange = (e) => {
         setUser({
             ...user,
@@ -50,6 +51,6 @@ const Login = (props) => {
 
 const mapDispathToProps = {
     fetchLogin,
-}
+};
 
 export default connect(null, mapDispathToProps)(Login);

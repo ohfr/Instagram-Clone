@@ -17,10 +17,12 @@ const Home = (props) => {
                 console.log(err);
             });
     }, []);
+
     const handleLogout = () => {
         props.fetchLogout();
         props.history.push("/login");
-    }
+    };
+    
     return (
         <div>
             <button onClick={handleLogout}>Logout</button>
@@ -29,11 +31,11 @@ const Home = (props) => {
                 return <Post key={index} post_id={cur.id} title={cur.title} image={cur.image} username={cur.username} />
             })}
         </div>
-    )
+    );
 };
 
 const mapDispatchToProps = {
     fetchLogout
-}
+};
 
 export default connect(null, mapDispatchToProps)(Home);
