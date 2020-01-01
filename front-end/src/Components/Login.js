@@ -9,7 +9,8 @@ const Login = () => {
     });
     
     const handleSubmit = (e) => {
-        if (user) {
+        e.preventDefault();
+        if (user.username && user.password) {
             api().post("/login", user)
                 .then(res => {
 
@@ -21,9 +22,11 @@ const Login = () => {
     };
     const handleChange = (e) => {
         setUser({
+            ...user,
             [e.target.name]: e.target.value
         });
     };
+    
     return (
         <div>
             <div>
@@ -32,7 +35,7 @@ const Login = () => {
                     <input type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange} />
                     <button type="submit">Login</button>
                 </form>
-                <button>Don't have an account? <Link to="/register">Sign Up!</Link></button>
+                <p>Don't have an account? <Link to="/register">Sign Up!</Link></p>
             </div>
         </div>
     );
