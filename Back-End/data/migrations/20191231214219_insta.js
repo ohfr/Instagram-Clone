@@ -10,14 +10,14 @@ exports.up = function(knex) {
     .createTable('likes', tbl => {
         tbl.increments();
   
-        tbl.integer('user_id', 128).unique().notNullable().unsigned().references('id').inTable('users');
+        tbl.string('username', 128).unique().notNullable().unsigned().references('username').inTable('users');
         tbl.integer('post_id').notNullable().unsigned().references("id").inTable("posts");
   
     })
     .createTable('posts', tbl => {
       tbl.increments();
   
-      tbl.integer('user_id').unique().notNullable().references('id').inTable("users");
+      tbl.string('username').unique().notNullable().references('username').inTable("users");
       tbl.string('title', 128);
       tbl.string('image', 128).notNullable();
     })
@@ -25,7 +25,7 @@ exports.up = function(knex) {
         tbl.increments();
   
         tbl.integer('post_id').notNullable().unsigned().references('id').inTable('posts');
-        tbl.integer('user_id', 128).unique().notNullable().unsigned().references('id').inTable('users');
+        tbl.string('username', 128).unique().notNullable().unsigned().references('username').inTable('users');
         tbl.string('comment', 128).notNullable();
     });
   };

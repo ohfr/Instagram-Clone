@@ -10,7 +10,11 @@ const userRoute = require("./Routes/userRoute");
 
 const postRoute = require("./Routes/postRoute");
 
+const cors = require("cors");
+
 server.use(express.json());
+
+server.use(cors());
 
 server.use("/users", userRoute);
 

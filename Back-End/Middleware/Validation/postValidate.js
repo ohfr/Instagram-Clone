@@ -21,7 +21,7 @@ const validatePostId = () => {
 
 const validateNewPost = () => {
     return async (req, res, next) => {
-        if (!req.body.user_id || !req.body.title || !req.body.image) {
+        if (!req.body.username || !req.body.title || !req.body.image) {
             return res.status(500).json({message: "Please provide all post requirements"});
         };
         next();

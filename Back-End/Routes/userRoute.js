@@ -49,7 +49,7 @@ router.post("/register", validateNewUser(), async (req, res, next) => {
 
         const token = generateToken(user);
 
-        res.json({id: user.id, token});
+        res.json({id: user.id, username: user.username, token});
     } catch(err) {
         next(err);
     };

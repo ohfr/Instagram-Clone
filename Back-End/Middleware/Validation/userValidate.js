@@ -30,12 +30,12 @@ const validateLogin = () => {
 
         if (username && password) {
             let user = await db.userLogin(username);
-            console.log(username)
 
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = generateToken(user);
                 req.validate = {
                     id: user.id,
+                    username: user.username,
                     token
                 };
                 next();

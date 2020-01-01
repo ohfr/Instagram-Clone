@@ -20,19 +20,22 @@ const Register = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (user.username && user.password && user.first_name && user.last_name) {
-            api().post("/register", user)
+            api().post("/users/register", user)
                 .then(res => {
-
+                    console.log(res);
+                    localStorage.setItem("token", res.data.token);
+                    props.history.push("/");
                 })
                 .catch(err => {
-
+                    console.log(err);
                 });
         };  
     };
-    
+
     return (
         <div>
             <div>
+                <h2>InstaClone</h2>
                 <form onSubmit={handleSubmit}>
                     <input type="text" placeholder="Username" name="username" value={user.username} onChange={handleChange} />
                     <input type="password" placeholder="Password" name="password" value={user.password} onChange={handleChange} />
