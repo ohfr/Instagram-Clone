@@ -3,9 +3,11 @@ import React from 'react';
 const Nav = (props) => {
 
     return (
-        <div>
-
-        </div>
+        <header className="nav-header">
+            <nav className="nav">
+                
+            </nav>
+        </header>
     );
 };
 

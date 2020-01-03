@@ -4,7 +4,7 @@ const router = express.Router({
     mergeParams: true
 });
 
-const { validatePostId, validateNewPost} = require('../Middleware/Validation/postValidate');
+const { validatePostId, validateNewPost, getPostComments } = require('../Middleware/Validation/postValidate');
 
 const db = require("../dbHelpers/posts");
 
@@ -17,9 +17,9 @@ router.get("/", async(req, res, next) => {
 });
 
 //route for all posts
-router.get("/all", async (req, res, next) => {
+router.get("/all", getPostComments(), async (req, res, next) => {
     try {
-        res.json(await db.getPost());
+        res.json(req.posts);
     } catch(err) {
         next(err);
     };

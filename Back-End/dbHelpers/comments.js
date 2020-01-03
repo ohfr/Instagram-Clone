@@ -21,8 +21,8 @@ const editComment = (id, comment) => {
 };
 
 const getCommentsByPost = (post_id) => {
-    return db("comments").join("users", "users.id", "comments.user_id").where("comments.post_id", post_id).select("users.username", "comments.comment");
-}
+    return db("comments").join("users", "users.username", "comments.username").where("comments.post_id", post_id).select("users.username", "comments.comment");
+};
 
 
 module.exports = {

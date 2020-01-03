@@ -24,11 +24,11 @@ const Home = (props) => {
     };
     
     return (
-        <div>
-            <button onClick={handleLogout}>Logout</button>
+        <div className="home-div">
             <Nav />
+            <button onClick={handleLogout}>Logout</button>
             {data.map((cur, index) => {
-                return <Post key={index} post_id={cur.id} title={cur.title} image={cur.image} username={cur.username} />
+                return <Post key={index} post_id={cur.id} title={cur.title} image={cur.image} username={cur.username} comments={cur.comments} />
             })}
         </div>
     );
