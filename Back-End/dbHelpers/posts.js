@@ -8,8 +8,8 @@ const getPostById = (id) => {
     return db("posts").where({id}).first();
 };
 
-const getPostByUserId = (user_id) => {
-    return db("posts").join("users", "posts.user_id", "users.id").where("posts.user_id", user_id).select("posts.id", "posts.title", "posts.image");
+const getPostByUsername = (username) => {
+    return db("posts").join("users", "posts.username", "users.username").where("posts.username", username).select("posts.id", "posts.title", "posts.image");
 }
 
 const addPost = async (post) => {
@@ -34,5 +34,5 @@ module.exports = {
     addPost,
     updatePost,
     deletePost,
-    getPostByUserId
+    getPostByUsername
 };

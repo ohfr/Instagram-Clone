@@ -65,9 +65,33 @@ const validateUserId = () => {
     };
 };
 
+const validateUsername = () => {
+    return async (req, res, next) => {
+        const username = req.decoded.username;
+
+        if (username) {
+            const user = await db.findUser(username);
+            if (user) {
+                const token = generateToken(user);
+                req.user = {
+                    id: user.id,
+                    username: user.username,
+                    token
+                };
+                next();
+            } else {
+                return res.status(500).json({message: "No user with specified username"})
+            };
+        } else {
+            return res.status(500).json({message: "Please provide required credentials"})
+        };
+    };
+};
+
 module.exports = {
     validateNewUser,
     validateUserLogin,
     validateLogin,
-    validateUserId
-}
+    validateUserId,
+    validateUsername
+};

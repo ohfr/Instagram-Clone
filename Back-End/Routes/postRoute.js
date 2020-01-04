@@ -4,9 +4,13 @@ const router = express.Router({
     mergeParams: true
 });
 
+const commentRoute = require("./commentRoute");
+
 const { validatePostId, validateNewPost, getPostComments } = require('../Middleware/Validation/postValidate');
 
 const db = require("../dbHelpers/posts");
+
+router.use("/comments", commentRoute);
 
 router.get("/", async(req, res, next) => {
     try {

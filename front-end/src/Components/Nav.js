@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchLogout } from '../Actions/userActions';
+import { Link } from 'react-router-dom';
 
 const Nav = (props) => {
     
@@ -19,9 +20,9 @@ const Nav = (props) => {
                     <h1 className="logo-h1">InstaClone</h1>
                 </div>
                 <div className="nav-right">
-                    <p className="nav-item">Search</p>
-                    <p className="nav-item">Likes</p>
-                    <p className="nav-item">Profile</p>
+                    <Link className="nav-item" to="/">Search</Link>
+                    <Link className="nav-item"to="/">Likes</Link>
+                    <Link className="nav-item"to="/">Profile</Link>
                     <button onClick={handleLogout}>Logout</button>
                 </div>
             </nav>

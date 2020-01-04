@@ -22,6 +22,7 @@ const validateCommentBody = () => {
     };
 };
 
+
 module.exports = {
     validateCommentBody,
     validateCommentId

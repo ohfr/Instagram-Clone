@@ -36,11 +36,12 @@ const getPostComments = () => {
                     return cur;
                 };
             });
-            Promise.all(newpost).then(result => {
-                console.log(result)
-                req.posts = result;
-                next();
-            });
+            Promise.all(newpost)
+                .then(result => {
+                    req.posts = result;
+                    next();
+                })
+                .catch(err => console.log(err));
         } else {
             return res.status(500).json({message: "No posts available"});
         };
@@ -56,11 +57,6 @@ const validateNewPost = () => {
     };
 };
 
-const asyncForEach = async (arr, cb) => {
-    for (let i=0; i < arr.length; i++) {
-        await cb(arr[i], i, arr);
-    };
-};
 
 module.exports = {
     validatePostId,

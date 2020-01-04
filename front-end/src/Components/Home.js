@@ -2,14 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Nav from './Nav';
 import api from '../Utils/api';
 import Post from './Post';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchUser } from '../Actions/userActions';
 
 const Home = (props) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        if (!props.user.username) {
+            props.fetchUser();
+        }
         api().get("/posts/all")
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setData(res.data);
             })
             .catch(err => {
@@ -19,7 +25,7 @@ const Home = (props) => {
     
     return (
         <div className="home-div">
-            <Nav />
+            <Route path="/" component={Nav} />
             {data.map((cur, index) => {
                 return <Post key={index} post_id={cur.id} title={cur.title} image={cur.image} username={cur.username} comments={cur.comments} />
             })}
@@ -27,5 +33,14 @@ const Home = (props) => {
     );
 };
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
 
-export default Home;
+const mapDispatchToProps = {
+    fetchUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

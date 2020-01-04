@@ -1,10 +1,11 @@
 import React, { useState }from 'react';
 import api from '../Utils/api';
+import { connect } from 'react-redux';
 
 const Post = (props) => {
     const [post, setPost] = useState({
         // get this from redux
-        // username: props.user.username,
+        username: props.user,
         post_id: props.post_id,
         comment: ''
     });
@@ -19,6 +20,12 @@ const Post = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // api call to add comment
+        console.log(post)
+        api().post("/posts/comments", post)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => console.log(err))
     };
 
 
@@ -57,4 +64,14 @@ const Post = (props) => {
     );
 };
 
-export default Post;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.username
+    };
+};
+
+const mapDispatchToProps = {
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

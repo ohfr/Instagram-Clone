@@ -4,6 +4,10 @@ const getUser = (id) => {
     return db("users").where({id}).select("id", "username", "first_name", "last_name").first();
 };
 
+const findUser = (username) => {
+    return db("users").where({username}).select("id", "username", "first_name", "last_name").first();
+}
+
 const addUser = async (user) => {
     const newId = await db("users").insert(user);
 
@@ -25,4 +29,5 @@ module.exports = {
     addUser,
     userLogin,
     updateUser,
+    findUser
 }
