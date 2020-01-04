@@ -21,6 +21,8 @@ const Post = (props) => {
         e.preventDefault();
         // api call to add comment
         console.log(post)
+
+        //this is still broke in the DB.. somewhere
         api().post("/posts/comments", post)
             .then(res => {
                 console.log(res);
