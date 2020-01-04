@@ -25,7 +25,7 @@ const Post = (props) => {
     return (
         <div className="post-div">
             <div className="post-header">
-                <h3>{props.username}</h3>
+                <h3 className="post-user">{props.username}</h3>
             </div>
             <div className="post-image-div">
                 <img className="post-image" src={props.image} alt={props.title} />
