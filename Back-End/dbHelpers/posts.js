@@ -13,7 +13,7 @@ const getPostByUsername = (username) => {
 }
 
 const addPost = async (post) => {
-    const newId = await db("posts").where("id", id).first();
+    const newId = await db("posts").insert(post);
 
     const newPost = await db("posts").where({id: newId[0]}).first();
 

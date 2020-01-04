@@ -7,7 +7,7 @@ const getComment = (id) => {
 const addComment =  async (post) => {
     const newId = await db("comments").insert(post);
 
-    const newComment = await db("comments").where("id", newId);
+    const newComment = await db("comments").where({id: newId[0]}).first();
 
     return newComment;
 };

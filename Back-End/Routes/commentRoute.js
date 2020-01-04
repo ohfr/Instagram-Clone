@@ -10,7 +10,7 @@ const { validatePostId } = require("../Middleware/Validation/postValidate");
 
 const { validateCommentBody, validateCommentId } = require("../Middleware/Validation/commentValidate");
 
-router.post("/", validatePostId(), validateCommentBody(), async (req, res, next) => {
+router.post("/", validateCommentBody(), async (req, res, next) => {
     try {
         res.json(await db.addComment(req.body));
     } catch(err) {
