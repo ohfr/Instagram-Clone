@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import api from '../Utils/api';
-import Post from './Post';
 import { connect } from 'react-redux';
+import api from '../Utils/api';
 import { fetchUser } from '../Actions/userActions';
 
-const Home = (props) => {
+const Profile = (props) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        if (!props.user) {
+        if (!props.user.username) {
             props.fetchUser();
-        }
-        api().get("/posts/all")
+        }else if (props.user.username) {
+        api().get(`/posts/${props.user.username}`)
             .then(res => {
                 console.log(res);
-                setData(res.data);
             })
             .catch(err => {
                 console.log(err);
             });
-    }, [props]);
-    
+        }
+    }, [props.user]);
+
     return (
-        <div className="home-div">
-            {data.map((cur, index) => {
-                return <Post key={index} post_id={cur.id} title={cur.title} image={cur.image} username={cur.username} comments={cur.comments} />
-            })}
+        <div>
+
         </div>
     );
 };
@@ -38,6 +35,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     fetchUser
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

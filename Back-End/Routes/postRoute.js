@@ -20,6 +20,14 @@ router.get("/", async(req, res, next) => {
     };
 });
 
+router.get("/:username", async(req, res, next) => {
+    try {
+        res.json(await db.getPostByUsername(req.params.username));
+    }catch(err) {
+        next(err);
+    };
+});
+
 //route for all posts
 router.get("/all", getPostComments(), async (req, res, next) => {
     try {

@@ -150,6 +150,8 @@
   font-family: 'Lobster',cursive;
   font-weight: 100;
   font-size: 1.5rem;
+  text-decoration: none;
+  color:black;  
 }
 
 .post-div:first-of-type {
