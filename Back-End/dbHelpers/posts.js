@@ -8,6 +8,10 @@ const getPostById = (id) => {
     return db("posts").where({id}).first();
 };
 
+const getPostByUserId = (id) => {
+    return db("posts").join("users", "posts.username", "users.username").where({"users.id": id}).select("users.username", "posts.id as post_id", "posts.title", "posts.image");
+}
+
 const getPostByUsername = (username) => {
     return db("posts").join("users", "posts.username", "users.username").where("posts.username", username).select("posts.id", "posts.title", "posts.image");
 }
@@ -34,5 +38,6 @@ module.exports = {
     addPost,
     updatePost,
     deletePost,
+    getPostByUserId,
     getPostByUsername
 };

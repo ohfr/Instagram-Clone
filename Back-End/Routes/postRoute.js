@@ -12,7 +12,7 @@ const db = require("../dbHelpers/posts");
 
 router.use("/comments", commentRoute);
 
-router.get("/", async(req, res, next) => {
+router.get("/user/:id", async(req, res, next) => {
     try {
         res.json(await db.getPostByUserId(req.params.id));
     } catch(err) {
@@ -29,7 +29,7 @@ router.get("/:username", async(req, res, next) => {
 });
 
 //route for all posts
-router.get("/all", getPostComments(), async (req, res, next) => {
+router.get("/", getPostComments(), async (req, res, next) => {
     try {
         res.json(req.posts);
     } catch(err) {
@@ -41,9 +41,9 @@ router.get("/:id", validatePostId(), async(req, res, next) => {
     res.json(req.post)
 });
 
-router.get("/:id/comments", validatePostId(), async (req, res, next) => {
+router.get("/:post_id/comments", validatePostId(), async (req, res, next) => {
     try {
-        res.json(await db.getPostComments(req.params.id));
+        res.json(await db.getPostComments(req.params.post_id));
     } catch(err) {
         next(err);
     };
@@ -57,17 +57,17 @@ router.post("/", validateNewPost(), async(req, res, next) => {
     };
 });
 
-router.put("/:id", validatePostId(), async (req, res, next) => {
+router.put("/:post_id", validatePostId(), async (req, res, next) => {
     try {
-        res.json(await db.updatePost(req.params.id, req.body));
+        res.json(await db.updatePost(req.params.post_id, req.body));
     } catch(err) {
         next(err);
     };
 });
 
-router.delete("/:id", validatePostId(), async (req, res, next) => {
+router.delete("/:post_id", validatePostId(), async (req, res, next) => {
     try {
-        res.json(await db.deletePost(req.params.id));
+        res.json(await db.deletePost(req.params.post_id));
     } catch(err) {
         next(err);
     };

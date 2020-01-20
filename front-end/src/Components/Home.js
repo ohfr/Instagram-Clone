@@ -11,7 +11,7 @@ const Home = (props) => {
         if (!props.user) {
             props.fetchUser();
         }
-        api().get("/posts/all")
+        api().get("/posts")
             .then(res => {
                 console.log(res);
                 setData(res.data);
