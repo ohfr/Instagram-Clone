@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
 import api from '../Utils/api';
 import { connect } from 'react-redux';
 
@@ -10,6 +10,8 @@ const Post = (props) => {
         comment: ''
     });
 
+    const [refresh, setRefresh] = useState(false);
+
     const handleChange = (e) => {
         setPost({
             ...post,
@@ -19,16 +21,17 @@ const Post = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // api call to add comment
-        console.log(post)
 
-        //this is still broke in the DB.. somewhere
-        api().post("/posts/comments", post)
+        api().post(`/posts/comments/${post.post_id}`, post)
             .then(res => {
-                console.log(res);
+                setRefresh(!refresh);
             })
             .catch(err => console.log(err))
     };
+
+    useEffect(() => {
+
+    }, [refresh])
 
 
     return (
