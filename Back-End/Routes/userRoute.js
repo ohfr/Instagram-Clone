@@ -14,7 +14,7 @@ const postRoute = require("../Routes/postRoute");
 
 
 
-router.use("/:id/posts", postRoute);
+// router.use("/:id/posts", postRoute);
 
 router.get("/:id", validateUserId(), async (req, res, next) => {
     try {

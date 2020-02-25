@@ -17,12 +17,12 @@ const Nav = (props) => {
                     {/* logo here */}
 
                     {/* italics font for title */}
-                    <h1 className="logo-h1">InstaClone</h1>
+                    <Link to="/"className="logo-h1">InstaClone</Link>
                 </div>
                 <div className="nav-right">
                     <Link className="nav-item" to="/">Search</Link>
                     <Link className="nav-item"to="/">Likes</Link>
-                    <Link className="nav-item"to="/">Profile</Link>
+                    <Link className="nav-item"to="/Profile">Profile</Link>
                     <button onClick={handleLogout}>Logout</button>
                 </div>
             </nav>

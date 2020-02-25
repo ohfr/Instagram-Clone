@@ -19,7 +19,6 @@ export const fetchUser = () => dispatch => {
     dispatch({ type: LOGIN_START });
     api().get("/users/")
         .then(user => {
-            console.log(user)
             dispatch({ type: LOGIN, payload: user.data });
         })
         .catch(err => {

@@ -4,7 +4,7 @@ const commentDb = require("../../dbHelpers/comments");
 
 const validatePostId = () => {
     return async (req, res, next) => {
-        let validPost = await db.getPostById(req.params.id);
+        let validPost = await db.getPostById(req.params.post_id);
 
         if (validPost) {
             let comments = await commentDb.getCommentsByPost(req.params.id);
@@ -21,7 +21,10 @@ const validatePostId = () => {
 
 const getPostComments = () => {
     return async (req, res, next) => {
+        console.log("hi")
         let validPost = await db.getPost();
+
+        console.log(validPost)
 
         if (validPost) {
             const newpost = validPost.map(async (cur) => {
