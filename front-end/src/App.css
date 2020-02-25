@@ -48,8 +48,8 @@
 
 .post-header {
   display: flex;
-  flex-flow: row wrap;
-  align-items: flex-start;
+  align-items: center;
+  height: 60px;
 }
 
 .comment-box {
@@ -91,6 +91,10 @@
   margin: 0px 0px 0px 10px;
 }
 
+.comments {
+  text-align: left;
+}
+
 .title-div {
   display: flex;
   align-items: center;
@@ -101,9 +105,9 @@
 
 .comments-div {
   display: flex;
-  align-content: center;
+  align-content: flex-start;
   justify-content: flex-start;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   width: 100%;
   margin-bottom: 20px;
 }

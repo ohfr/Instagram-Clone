@@ -11,8 +11,8 @@ import Nav from './Components/Nav';
 function App() {
   return (
     <div className="App">
-      <ProtectedRoute exact path="/" component={Home} />
       <ProtectedRoute path="/" component={Nav} />
+      <ProtectedRoute exact path="/" component={Home} />
       <ProtectedRoute path="/Profile" component={Profile} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
