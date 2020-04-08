@@ -27,12 +27,19 @@ exports.up = function(knex) {
         tbl.integer('post_id').notNullable().unsigned().references('id').inTable('posts');
         tbl.string('username', 128).notNullable().unsigned().references('username').inTable('users');
         tbl.string('comment', 128).notNullable();
-    });
+    })
+    .createTable('follows', tbl => {
+      tbl.integer('user_id').notNullable().unsigned().references("id").inTable("users");
+      tbl.integer("following").notNullable().unsigned().references("id").inTable("users");
+
+      tbl.primary(["user_id", "following"]);
+    })
   };
   
   exports.down = function(knex) {
     return knex.schema.dropTableIfExists('users')
       .dropTableIfExists('posts')
       .dropTableIfExists('comments')
-      .dropTableIfExists('likes');
+      .dropTableIfExists('likes')
+      .dropTableIfExists("follows")
   };
